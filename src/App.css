@@ -1,0 +1,21 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    justify-content: center;
+    height: 70vh;
+    align-items: center;
+}
+
+.login-form h5 {
+    font-size: 1.6rem;
+}
+
+.loginForm-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    height: 70%;
+    font-size: 0.9rem;
+}

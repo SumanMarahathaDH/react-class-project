@@ -6,11 +6,13 @@ import Dashboard from '../Pages/Dashboard'
 
 const MainRoutes = () => {
   return (
+    <div style={{minHeight: '100vh', minWidth: '100vw'}}>
     <Routes>
         <Route path='' element={<Authentication />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='*' element={<Error404Page />} />
     </Routes>
+    </div>
   )
 }
 
