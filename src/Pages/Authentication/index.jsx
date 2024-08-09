@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import LoginForm from '../../Components/Forms/LoginForm'
-import { login } from './services'
+import { environmentConfig } from '../../Utils/config/environmentConfig'
+import { setItem } from '../../Utils/config/storageConfig'
+import { getUserDetail, login } from './services'
 
 const Authentication = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -10,8 +12,16 @@ const Authentication = () => {
   })
   const handleSubmit = async (e) => {
     e.preventDefault()
+    try{
     const loginResponse = await login()
-    console.log(loginResponse)
+    const accountId = environmentConfig.accountId
+    const detailResponse = await getUserDetail(accountId)
+    setItem('isAuthenticated', true)
+    setItem('userDetails', JSON.stringify(detailResponse.data))
+    }
+    catch(err){
+      alert(err)
+    }
   }
   return (
     <div className='login-form'>
