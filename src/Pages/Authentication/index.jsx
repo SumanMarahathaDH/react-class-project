@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import LoginForm from '../../Components/Forms/LoginForm'
 import { environmentConfig } from '../../Utils/config/environmentConfig'
 import { setItem } from '../../Utils/config/storageConfig'
@@ -10,6 +11,7 @@ const Authentication = () => {
     email: '',
     password: '',
   })
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault()
     try{
@@ -18,6 +20,7 @@ const Authentication = () => {
     const detailResponse = await getUserDetail(accountId)
     setItem('isAuthenticated', true)
     setItem('userDetails', JSON.stringify(detailResponse.data))
+      navigate("/dashboard")
     }
     catch(err){
       alert(err)

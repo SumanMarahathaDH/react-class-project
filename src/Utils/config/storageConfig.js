@@ -3,10 +3,7 @@ export const getItem = (key) => {
         return
     }
     const value = localStorage.getItem(key)
-    if(!value){
-        alert("No any such values")
-    }
-    else return value
+    return value
 }
 
 export const setItem = (key, value) => {
