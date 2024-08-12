@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Navbar from '../../Components/Partials/Navbar'
-import { getPopularMovies } from './services'
+import PopularMovies from '../PopularMovies'
 
 const Dashboard = () => {
-
-  const [popularMovies, setPopularMovies] = useState([])
-
-  const getData = async () => {
-    const popularMoviesData = await getPopularMovies()
-    setPopularMovies(popularMoviesData.results)
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
-
-
   return (
     <div>
       <Navbar />
+      <PopularMovies />
     </div>
   )
 }

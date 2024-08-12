@@ -19,3 +19,9 @@
     height: 70%;
     font-size: 0.9rem;
 }
+
+.popularMoviesList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
