@@ -11,3 +11,8 @@ export const addToFavourite = async (requestData) => {
     const favouriteResponse = await axiosInstance.post(`account/${environmentConfig.accountId}/favorite`,requestData)
     return favouriteResponse
 }
+
+export const getMyFavourite = async () => {
+    const myFavouriteResponse = await axiosInstance.get(`account/${environmentConfig.accountId}/favorite/movies`)
+    return myFavouriteResponse.data
+}
