@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { addToFavourite, getMovieDetails, getMyFavourite } from './service'
 
 const MovieDetails = () => {
+  const {id} = useParams()
+  const [favouriteList, setFavouriteList] = useState([])
     const [movieDetails, setMovieDetails] = useState({})
     const [isFavourite, setIsFavourite] = useState(false)
-    const [favouriteList, setFavouriteList] = useState([])
     const [isChangedFavourite, setIsChangedFavourite] = useState(false)
-
-    const {id} = useParams()
+    const hasScreenMounted = useRef(false)
 
     const navigate = useNavigate();
 
@@ -22,11 +23,14 @@ const MovieDetails = () => {
     },[])
 
     useEffect(() => {
-      addToFavouriteHandler()
+     const isAlreaady = favouriteList.every(item => item.id === Number(id))
+     if(Boolean(isAlreaady) === false){
+        addToFavouriteHandler()
+  }
     },[isFavourite])
 
     useEffect(() => {
-      getMyfavouriteList()
+     getMyfavouriteList()
     },[isChangedFavourite])
 
     const backgroundImageLink = "https://image.tmdb.org/t/p/original/" + movieDetails?.backdrop_path
@@ -43,6 +47,10 @@ const MovieDetails = () => {
 
     const getMyfavouriteList = async () => {
       const response = await getMyFavourite()
+      const isAlreadyExists = await response.results.some(item => item.id == id)      
+      if(isAlreadyExists){
+        setIsFavourite(true)
+      }
       setFavouriteList(response.results)
     }
 
